@@ -7,7 +7,7 @@ import 'dart:collection' show Queue;
 
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:celatte_oauth2/oauth2.dart' as oauth2;
 import 'package:test/test.dart';
 
 class ExpectClient extends MockClient {

@@ -13,6 +13,7 @@ import 'package:http_parser/http_parser.dart';
 import 'client.dart';
 import 'authorization_exception.dart';
 import 'credentials.dart';
+import 'flow_state.dart';
 import 'handle_access_token_response.dart';
 import 'parameters.dart';
 import 'utils.dart';
@@ -108,7 +109,7 @@ class AuthorizationCodeGrant {
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~';
 
   /// The PKCE code verifier. Will be generated if one is not provided in the constructor.
-  final String _codeVerifier;
+  String _codeVerifier;
 
   /// Creates a new grant.
   ///
@@ -161,6 +162,24 @@ class AuthorizationCodeGrant {
         _getParameters = getParameters ?? parseJsonParameters,
         _onCredentialsRefreshed = onCredentialsRefreshed,
         _codeVerifier = codeVerifier ?? _createCodeVerifier();
+
+  FlowState getFlowState() {
+    return FlowState(
+      phase: _state.toString(),
+      pkceVerifier: _codeVerifier,
+      redirectUri: _redirectEndpoint?.toString(),
+      state: _stateString,
+      scopes: _scopes,
+    );
+  }
+
+  void setFlowState(final FlowState flowState) {
+    _state = _State(flowState.phase);
+    _codeVerifier = flowState.pkceVerifier;
+    _redirectEndpoint = (flowState.redirectUri != null) ? Uri.parse(flowState.redirectUri!) : null;
+    _stateString = flowState.state;
+    _scopes = flowState.scopes;
+  }
 
   /// Returns the URL to which the resource owner should be redirected to
   /// authorize this client.

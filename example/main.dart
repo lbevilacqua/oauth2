@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:celatte_oauth2/oauth2.dart' as oauth2;
 
 // These URLs are endpoints that are provided by the authorization
 // server. They're usually included in the server's documentation of its

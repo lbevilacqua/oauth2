@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:http/http.dart' as http;
-import 'package:oauth2/oauth2.dart' as oauth2;
+import 'package:celatte_oauth2/oauth2.dart' as oauth2;
 import 'package:test/test.dart';
 
 import 'utils.dart';
