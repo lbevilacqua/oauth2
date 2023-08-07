@@ -5,7 +5,7 @@ class FlowState {
 
 
   factory FlowState.fromJson(String json) {
-    void validate(condition, message) {
+    void validate(final bool condition, final String message) {
       if (condition) return;
       throw FormatException('Failed to load flow state: $message.\n\n$json');
     }
@@ -19,7 +19,7 @@ class FlowState {
 
     validate(parsed is Map, 'was not a JSON map');
 
-    validate(parsed.containsKey('phase'), 'did not contain required field "phase"');
+    validate((parsed as Map).containsKey('phase'), 'did not contain required field "phase"');
     validate(parsed['phase'] is String, 'required field "phase" was not a string, was ${parsed["phase"]}');
 
     validate(parsed.containsKey('pkceVerifier'), 'did not contain required field "pkceVerifier"');
@@ -29,10 +29,10 @@ class FlowState {
     validate(scopes == null || scopes is List, 'field "scopes" was not a list, was "$scopes"');
 
     return FlowState(
-      phase: parsed['phase'],
-      pkceVerifier: parsed['pkceVerifier'],
-      redirectUri: parsed['redirectUri'],
-      state: parsed['state'],
+      phase: parsed['phase'] as String,
+      pkceVerifier: parsed['pkceVerifier'] as String,
+      redirectUri: parsed['redirectUri'] as String?,
+      state: parsed['state'] as String?,
       scopes: (scopes as List).map((scope) => scope as String).toList(),
     );
   }
@@ -49,11 +49,11 @@ class FlowState {
 
 
   const FlowState({
-    required final this.phase,
-    required final this.pkceVerifier,
-    final this.redirectUri,
-    final this.state,
-    final this.scopes,
+    required this.phase,
+    required this.pkceVerifier,
+    this.redirectUri,
+    this.state,
+    this.scopes,
   });
 
 

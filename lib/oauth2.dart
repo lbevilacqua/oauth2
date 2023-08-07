@@ -6,10 +6,10 @@ library celatte_oauth2;
 
 
 export 'src/authorization_code_grant.dart';
-export 'src/client_credentials_grant.dart';
-export 'src/resource_owner_password_grant.dart';
-export 'src/client.dart';
-export 'src/credentials.dart';
 export 'src/authorization_exception.dart';
+export 'src/client.dart';
+export 'src/client_credentials_grant.dart';
+export 'src/credentials.dart';
 export 'src/expiration_exception.dart';
 export 'src/flow_state.dart';
+export 'src/resource_owner_password_grant.dart';
